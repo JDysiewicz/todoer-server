@@ -10,7 +10,6 @@ defmodule TodoerWeb.Resolvers.Content do
   end
 
   def find_projects(user, _args, _info) do
-    IO.inspect(user)
     projects = Todoer.Repo.all(Ecto.assoc(user, :projects))
     {:ok, projects}
   end
