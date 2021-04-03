@@ -8,6 +8,13 @@ defmodule Todoer.Content do
 
   alias Todoer.Content.Project
 
+  def list_user_projects(%{"user" => id}) do
+    IO.puts("+++++++++")
+
+    from(t in Project, where: t.user_id == ^id)
+    |> Repo.all()
+  end
+
   @doc """
   Returns the list of projects.
 

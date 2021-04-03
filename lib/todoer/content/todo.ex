@@ -6,6 +6,8 @@ defmodule Todoer.Content.Todo do
     field :due, :date
     field :name, :string
     field :done, :boolean
+    belongs_to :user, Todoer.Accounts.User
+    belongs_to :project, Todoer.Content.Project
 
     timestamps()
   end

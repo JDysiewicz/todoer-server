@@ -6,6 +6,8 @@ defmodule Todoer.Accounts.User do
     field :email, :string
     field :provider, :string
     field :token, :string
+    has_many :projects, Todoer.Content.Project
+    has_many :todos, Todoer.Content.Todo
 
     timestamps()
   end

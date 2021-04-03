@@ -6,6 +6,8 @@ defmodule Todoer.Content.Project do
     field :color, :string
     field :name, :string
     field :order, :integer
+    belongs_to :user, Todoer.Accounts.User
+    has_many :todos, Todoer.Content.Todo
 
     timestamps()
   end
