@@ -26,6 +26,11 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
+# Guardian config details - pls ignore I'm new to elixir :(
+config :todoer, Todoer.Guardian,
+  issuer: "todoer",
+  secret_key: "/mJGnrKAnGwBMbbATtCdASGJU/lxYf/cSbXTNAJAI2LVjtcItzBD5uplpJHtt5Zf"
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"

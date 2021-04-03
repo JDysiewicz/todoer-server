@@ -21,4 +21,14 @@ defmodule TodoerWeb.Schema.AccountTypes do
     field(:password, non_null(:string))
     field(:password_confirmation, non_null(:string))
   end
+
+  object :session do
+    field(:token, :string)
+    field(:user, :user)
+  end
+
+  input_object :session_input do
+    field(:email, non_null(:string))
+    field(:password, non_null(:string))
+  end
 end

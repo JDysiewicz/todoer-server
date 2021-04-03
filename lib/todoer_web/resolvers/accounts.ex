@@ -17,4 +17,11 @@ defmodule TodoerWeb.Resolvers.Accounts do
   def create_user(_parent, %{input: input}, _info) do
     Todoer.Accounts.create_user(input)
   end
+
+  def login_user(_parent, %{input: input}, _info) do
+    with {:ok, user} <- Todoer.Accounts.Session.authenticate(input),
+         {:ok, jwt, _} <- Todoer.Guardian.encode_and_sign(user) do
+      {:ok, %{token: jwt, user: user}}
+    end
+  end
 end

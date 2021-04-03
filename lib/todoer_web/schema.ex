@@ -46,5 +46,11 @@ defmodule TodoerWeb.Schema do
       arg(:input, non_null(:user_input))
       resolve(&Resolvers.Accounts.create_user/3)
     end
+
+    @desc "Login a user and return a JWT"
+    field :login_user, :session do
+      arg(:input, non_null(:session_input))
+      resolve(&Resolvers.Accounts.login_user/3)
+    end
   end
 end
