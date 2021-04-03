@@ -14,7 +14,7 @@ defmodule TodoerWeb.Resolvers.Accounts do
     {:ok, user}
   end
 
-  def create_account(_parent, args, _info) do
-    Todoer.Accounts.create_user(args)
+  def create_user(_parent, %{input: input}, _info) do
+    Todoer.Accounts.create_user(input)
   end
 end

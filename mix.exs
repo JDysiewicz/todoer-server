@@ -47,7 +47,9 @@ defmodule Todoer.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:absinthe, "~> 1.5"},
       {:absinthe_plug, "~> 1.4"},
-      {:poison, "~> 2.1.0"}
+      {:poison, "~> 2.1.0"},
+      {:comeonin, "~> 4.0"},
+      {:argon2_elixir, "~> 1.2"}
     ]
   end
 

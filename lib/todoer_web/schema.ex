@@ -7,6 +7,10 @@ defmodule TodoerWeb.Schema do
   alias TodoerWeb.Resolvers
 
   query do
+    @desc "Get a list of all users"
+    field :users, list_of(:user), resolve: &Resolvers.Accounts.list_users/3
+
+    # Ignore below
     @desc "Get all projects"
     field :get_projects, list_of(:project) do
       resolve(&Resolvers.Content.list_projects/3)
@@ -29,11 +33,6 @@ defmodule TodoerWeb.Schema do
       resolve(&Resolvers.Content.find_todo/3)
     end
 
-    @desc "Get all users"
-    field :get_users, list_of(:user) do
-      resolve(&Resolvers.Accounts.list_users/3)
-    end
-
     @desc "Get user by id"
     field :get_user, :user do
       arg(:id, non_null(:id))
@@ -42,13 +41,10 @@ defmodule TodoerWeb.Schema do
   end
 
   mutation do
-    @desc "Create a user"
+    @desc "Create new user"
     field :create_user, :user do
-      arg(:email, non_null(:string))
-      arg(:provider, non_null(:string))
-      arg(:token, non_null(:string))
-
-      resolve(&Resolvers.Accounts.create_account/3)
+      arg(:input, non_null(:user_input))
+      resolve(&Resolvers.Accounts.create_user/3)
     end
   end
 end
