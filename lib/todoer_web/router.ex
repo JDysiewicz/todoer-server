@@ -3,6 +3,7 @@ defmodule TodoerWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug(TodoerWeb.Plugs.Context)
   end
 
   scope "/" do

@@ -1,5 +1,6 @@
 defmodule TodoerWeb.Resolvers.Accounts do
-  def list_users(_parent, _args, _info) do
+  def list_users(_parent, _args, %{context: context}) do
+    IO.inspect(context)
     users = Todoer.Accounts.list_users()
     {:ok, users}
   end
