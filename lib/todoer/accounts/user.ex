@@ -3,9 +3,13 @@ defmodule Todoer.Accounts.User do
   import Ecto.Changeset
 
   schema "users" do
-    field :email, :string
-    field :provider, :string
-    field :token, :string
+    field(:name, :string)
+    field :email, :string, unique: true
+    field :password_hash, :string
+    field :role, :string, default: "user"
+    field(:password, :string, virtual: true)
+    field(:password_confirmation, :string, virtual: true)
+
     has_many :projects, Todoer.Content.Project
     has_many :todos, Todoer.Content.Todo
 
@@ -15,7 +19,17 @@ defmodule Todoer.Accounts.User do
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:email, :token, :provider])
-    |> validate_required([:email, :token, :provider])
+    |> cast(attrs, [:name, :email, :password, :password_confirmation, :role])
+    |> validate_required([:name, :email, :password, :password_confirmation, :role])
+    |> validate_format(:email, ~r/@/)
+    |> update_change(:email, &String.downcase(&1))
+    |> validate_length(:password, min: 6, max: 24)
+    |> validate_confirmation(:password)
+    |> unique_constraint(:email)
+    |> hash_password()
+  end
+
+  defp hash_password(changeset) do
+    changeset
   end
 end

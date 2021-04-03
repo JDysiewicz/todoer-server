@@ -12,6 +12,6 @@ defmodule TodoerWeb.Schema.AccountTypes do
       resolve(&Resolvers.Content.find_projects/3)
     end
 
-    field :todos, list_of(:todo)
+    field :todos, list_of(:todo), resolve: &Resolvers.Content.find_todos/3
   end
 end
