@@ -45,12 +45,13 @@ defmodule Todoer.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
-      {:absinthe, "~> 1.5"},
       {:absinthe_plug, "~> 1.4"},
       {:poison, "~> 2.1.0"},
       {:comeonin, "~> 4.0"},
       {:argon2_elixir, "~> 1.2"},
-      {:guardian, "~> 2.0"}
+      {:guardian, "~> 1.0"},
+      {:absinthe, "~> 1.6"},
+      {:dataloader, "~> 1.0.8"}
     ]
   end
 

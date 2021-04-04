@@ -15,7 +15,7 @@ defmodule Todoer.Content.Project do
   @doc false
   def changeset(project, attrs) do
     project
-    |> cast(attrs, [:name, :order, :color])
-    |> validate_required([:name, :order, :color])
+    |> cast(attrs, [:name, :order, :color, :user_id])
+    |> validate_required([:name, :order, :color, :user_id])
   end
 end

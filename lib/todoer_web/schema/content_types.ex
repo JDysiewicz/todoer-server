@@ -19,4 +19,10 @@ defmodule TodoerWeb.Schema.ContentTypes do
     field :user, :user, resolve: &Resolvers.Accounts.find_user/3
     field :due, :naive_datetime
   end
+
+  input_object :project_input do
+    field :name, non_null(:string)
+    field :color, non_null(:string)
+    field :order, :integer
+  end
 end

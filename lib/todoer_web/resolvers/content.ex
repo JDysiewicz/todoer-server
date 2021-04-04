@@ -41,9 +41,6 @@ defmodule TodoerWeb.Resolvers.Content do
     {:ok, todos}
   end
 
-  @doc """
-  Returns a list of todos that belong to a project, when project is parent in GQL
-  """
   def find_todos(%Todoer.Content.Project{} = project, _args, _info) do
     todos = Todoer.Repo.all(Ecto.assoc(project, :todos))
     {:ok, todos}
@@ -54,12 +51,8 @@ defmodule TodoerWeb.Resolvers.Content do
     {:ok, todo}
   end
 
-  def create_project(_parent, args, _info) do
-    Todoer.Content.create_project(%{
-      name: args.name,
-      order: args.order,
-      color: args.color,
-      user_id: args.userId
-    })
+  def create_project(_parent, %{input: input}, %{context: %{current_user: current_user}}) do
+    project_input = Map.merge(input, %{user_id: current_user.id})
+    Todoer.Content.create_project(project_input)
   end
 end

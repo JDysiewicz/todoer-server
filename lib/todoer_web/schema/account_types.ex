@@ -1,5 +1,6 @@
 defmodule TodoerWeb.Schema.AccountTypes do
   use Absinthe.Schema.Notation
+
   alias TodoerWeb.Resolvers
 
   object :user do
@@ -7,11 +8,7 @@ defmodule TodoerWeb.Schema.AccountTypes do
     field :email, :string
     field :name, :string
     field :role, :string
-
-    field :projects, list_of(:project) do
-      resolve(&Resolvers.Content.find_projects/3)
-    end
-
+    field :projects, list_of(:project), resolve: &Resolvers.Content.find_projects/3
     field :todos, list_of(:todo), resolve: &Resolvers.Content.find_todos/3
   end
 

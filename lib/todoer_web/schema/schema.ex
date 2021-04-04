@@ -5,10 +5,14 @@ defmodule TodoerWeb.Schema do
   import_types(TodoerWeb.Schema.ContentTypes)
 
   alias TodoerWeb.Resolvers
+  alias TodoerWeb.Schema.Middleware
 
   query do
     @desc "Get a list of all users"
-    field :users, list_of(:user), resolve: &Resolvers.Accounts.list_users/3
+    field :get_users, list_of(:user) do
+      middleware(Middleware.Authorize, "admin")
+      resolve(&Resolvers.Accounts.list_users/3)
+    end
 
     # Ignore below
     @desc "Get all projects"
@@ -51,6 +55,13 @@ defmodule TodoerWeb.Schema do
     field :login_user, :session do
       arg(:input, non_null(:session_input))
       resolve(&Resolvers.Accounts.login_user/3)
+    end
+
+    @desc "Create a project"
+    field :add_project, :project do
+      middleware(Middleware.Authorize, :any)
+      arg(:input, non_null(:project_input))
+      resolve(&Resolvers.Content.create_project/3)
     end
   end
 end
