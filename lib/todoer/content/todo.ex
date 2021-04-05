@@ -4,7 +4,7 @@ defmodule Todoer.Content.Todo do
 
   schema "todos" do
     field :due, :date
-    field :name, :string
+    field :title, :string
     field :done, :boolean
     belongs_to :user, Todoer.Accounts.User
     belongs_to :project, Todoer.Content.Project
@@ -15,7 +15,7 @@ defmodule Todoer.Content.Todo do
   @doc false
   def changeset(todo, attrs) do
     todo
-    |> cast(attrs, [:name, :due, :done, :user_id, :project_id])
-    |> validate_required([:name, :done, :user_id, :project_id])
+    |> cast(attrs, [:title, :due, :done, :user_id, :project_id])
+    |> validate_required([:title, :done, :user_id, :project_id])
   end
 end

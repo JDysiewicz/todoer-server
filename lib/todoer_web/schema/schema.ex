@@ -14,6 +14,12 @@ defmodule TodoerWeb.Schema do
       middleware(Middleware.Authorize, "admin")
       resolve(&Resolvers.User.list_users/3)
     end
+
+    @desc "Get a list of all projects for a logged-in user"
+    field :projects, list_of(:project) do
+      middleware(Middleware.Authorize, :any)
+      resolve(&Resolvers.Project.list_projects/3)
+    end
   end
 
   mutation do

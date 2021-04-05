@@ -3,8 +3,9 @@ defmodule Todoer.Repo.Migrations.CreateTodos do
 
   def change do
     create table(:todos) do
-      add :name, :string
+      add :title, :string
       add :due, :date
+      add :done, :boolean
 
       timestamps()
     end

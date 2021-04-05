@@ -5,7 +5,7 @@ defmodule TodoerWeb.Schema.Types.Todo do
 
   object :todo do
     field :id, non_null(:id)
-    field :name, :string
+    field :title, :string
     field :project, :project, resolve: &Resolvers.Project.find_project_from_todo/3
     field :user, :user, resolve: &Resolvers.User.find_user_from_todo/3
     field :due, :naive_datetime

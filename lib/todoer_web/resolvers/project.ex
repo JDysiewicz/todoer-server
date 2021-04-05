@@ -7,6 +7,11 @@ defmodule TodoerWeb.Resolvers.Project do
   #   {:ok, projects}
   # end
 
+  def list_projects(_parent, _args, %{context: %{current_user: current_user}}) do
+    projects = Todoer.Repo.all(Ecto.assoc(current_user, :projects))
+    {:ok, projects}
+  end
+
   def find_projects_from_user(%Todoer.Accounts.User{} = user, _args, _info) do
     projects = Todoer.Repo.all(Ecto.assoc(user, :projects))
     {:ok, projects}
