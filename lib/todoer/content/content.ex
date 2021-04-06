@@ -62,6 +62,14 @@ defmodule Todoer.Content do
     |> Repo.insert()
   end
 
+  def delete_project_by_id(id) do
+    from(p in "projects", where: p.id == ^id) |> Todoer.Repo.delete_all()
+  end
+
+  def delete_todo_by_id(id) do
+    from(t in "todos", where: t.id == ^id) |> Todoer.Repo.delete_all()
+  end
+
   @doc """
   Updates a project.
 

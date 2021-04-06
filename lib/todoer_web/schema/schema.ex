@@ -35,11 +35,39 @@ defmodule TodoerWeb.Schema do
       resolve(&Resolvers.User.login_user/3)
     end
 
-    @desc "Create a project"
-    field :add_project, :project do
+    @desc "Create a project for logged-in user"
+    field :create_project, :project do
       middleware(Middleware.Authorize, :any)
       arg(:input, non_null(:project_input))
       resolve(&Resolvers.Project.create_project/3)
+    end
+
+    @desc "Update a project for logged-in user"
+    field :update_project, :project do
+      middleware(Middleware.Authorize, :any)
+      arg(:input, non_null(:project_update))
+      resolve(&Resolvers.Project.update_project/3)
+    end
+
+    @desc "Delete a project by ID for logged-in user"
+    field :delete_project, :string do
+      middleware(Middleware.Authorize, :any)
+      arg(:id, non_null(:id))
+      resolve(&Resolvers.Project.delete_project/3)
+    end
+
+    @desc "Create a todo for logged-in user"
+    field :create_todo, :todo do
+      middleware(Middleware.Authorize, :any)
+      arg(:input, non_null(:todo_input))
+      resolve(&Resolvers.Todo.create_todo/3)
+    end
+
+    @desc "Delete a Todo by ID for logged-in user"
+    field :delete_todo, :string do
+      middleware(Middleware.Authorize, :any)
+      arg(:id, non_null(:id))
+      resolve(&Resolvers.Todo.delete_todo/3)
     end
   end
 end

@@ -14,6 +14,13 @@ defmodule TodoerWeb.Schema.Types.Project do
   input_object :project_input do
     field :name, non_null(:string)
     field :color, non_null(:string)
+    field :order, non_null(:integer)
+  end
+
+  input_object :project_update do
+    field :id, non_null(:id)
+    field :name, :string
+    field :color, :string
     field :order, :integer
   end
 end

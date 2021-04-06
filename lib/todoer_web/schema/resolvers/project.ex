@@ -31,4 +31,18 @@ defmodule TodoerWeb.Resolvers.Project do
     project_input = Map.merge(input, %{user_id: current_user.id})
     Todoer.Content.create_project(project_input)
   end
+
+  def update_project(_parent, %{input: input}, _info) do
+    project = Todoer.Content.get_project!(input.id)
+    Todoer.Content.update_project(project, input)
+  end
+
+  def delete_project(_parent, %{id: id}, _info) do
+    {num, _extra} = Todoer.Content.delete_project_by_id(id)
+
+    case num do
+      0 -> {:error, "no entry found with that ID"}
+      _ -> {:ok, "project deleted"}
+    end
+  end
 end

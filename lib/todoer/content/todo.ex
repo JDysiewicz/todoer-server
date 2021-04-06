@@ -3,9 +3,9 @@ defmodule Todoer.Content.Todo do
   import Ecto.Changeset
 
   schema "todos" do
-    field :due, :date
+    field :due, :date, default: nil
     field :title, :string
-    field :done, :boolean
+    field :done, :boolean, default: false
     belongs_to :user, Todoer.Accounts.User
     belongs_to :project, Todoer.Content.Project
 
