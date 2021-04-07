@@ -13,6 +13,13 @@ config :todoer, TodoerWeb.Endpoint,
   url: [host: "https://todoer-server.gigalixirapp.com/", port: 443],
   cache_static_manifest: "priv/static/cache_manifest.json"
 
+config :todoer, Todoer.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  url: System.get_env("DATABASE_URL"),
+  ssl: true,
+  # Free tier db only allows 4 connections. Rolling deploys need pool_size*(n+1) connections.
+  pool_size: 2
+
 # Do not print debug messages in production
 config :logger, level: :info
 
