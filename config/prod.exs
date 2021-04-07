@@ -11,7 +11,7 @@ use Mix.Config
 # before starting your production server.
 config :todoer, TodoerWeb.Endpoint,
   url: [host: "https://todoer-server.gigalixirapp.com/", port: 443],
-  cache_static_manifest: "priv/static/cache_manifest.json",
+  cache_static_manifest: "priv/static/cache_manifest.json"
 
 config :todoer, Todoer.Repo,
   adapter: Ecto.Adapters.Postgres,
