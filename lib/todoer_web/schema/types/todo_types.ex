@@ -16,4 +16,11 @@ defmodule TodoerWeb.Schema.Types.Todo do
     field :due, :date
     field :project_id, :id
   end
+
+  input_object :todo_update do
+    field :id, non_null(:id)
+    field :title, :string
+    field :due, :date
+    field :project_id, :id
+  end
 end

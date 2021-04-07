@@ -30,4 +30,13 @@ defmodule TodoerWeb.Resolvers.User do
       {:ok, %{token: jwt, user: user}}
     end
   end
+
+  def delete_user(_parent, %{id: id}, _info) do
+    {num, _extra} = Todoer.Accounts.delete_user_by_id(id)
+
+    case num do
+      0 -> {:error, "no entry found with that ID"}
+      _ -> {:ok, "user deleted"}
+    end
+  end
 end

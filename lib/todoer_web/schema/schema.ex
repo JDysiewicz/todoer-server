@@ -63,6 +63,13 @@ defmodule TodoerWeb.Schema do
       resolve(&Resolvers.Todo.create_todo/3)
     end
 
+    @desc "Update a todo for logged-in user"
+    field :update_todo, :todo do
+      middleware(Middleware.Authorize, :any)
+      arg(:input, non_null(:todo_update))
+      resolve(&Resolvers.Todo.update_todo/3)
+    end
+
     @desc "Delete a Todo by ID for logged-in user"
     field :delete_todo, :string do
       middleware(Middleware.Authorize, :any)

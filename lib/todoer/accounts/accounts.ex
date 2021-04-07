@@ -37,6 +37,10 @@ defmodule Todoer.Accounts do
   """
   def get_user!(id), do: Repo.get!(User, id)
 
+  def delete_user_by_id(id) do
+    from(u in "users", where: u.id == ^id) |> Todoer.Repo.delete_all()
+  end
+
   @doc """
   Creates a user.
 

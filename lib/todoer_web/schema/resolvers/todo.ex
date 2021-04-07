@@ -14,6 +14,11 @@ defmodule TodoerWeb.Resolvers.Todo do
     Todoer.Content.create_todo(todo_input)
   end
 
+  def update_todo(_parent, %{input: input}, _info) do
+    todo = Todoer.Content.get_todo!(input.id)
+    Todoer.Content.update_todo(todo, input)
+  end
+
   def delete_todo(_parent, %{id: id}, _info) do
     {num, _extra} = Todoer.Content.delete_todo_by_id(id)
 
