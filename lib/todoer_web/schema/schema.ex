@@ -23,16 +23,23 @@ defmodule TodoerWeb.Schema do
   end
 
   mutation do
+    @desc "Login a user and return a JWT"
+    field :login_user, :session do
+      arg(:input, non_null(:session_input))
+      resolve(&Resolvers.User.login_user/3)
+    end
+
     @desc "Create new user"
     field :create_user, :user do
       arg(:input, non_null(:user_input))
       resolve(&Resolvers.User.create_user/3)
     end
 
-    @desc "Login a user and return a JWT"
-    field :login_user, :session do
-      arg(:input, non_null(:session_input))
-      resolve(&Resolvers.User.login_user/3)
+    @desc "Delete a user by id"
+    field :delete_user, :string do
+      middleware(Middleware.Authorize, :any)
+      arg(:id, non_null(:id))
+      resolve(&Resolvers.User.delete_user/3)
     end
 
     @desc "Create a project for logged-in user"
