@@ -20,7 +20,7 @@ defmodule Todoer.MixProject do
   def application do
     [
       mod: {Todoer.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :corsica]
     ]
   end
 
@@ -51,7 +51,8 @@ defmodule Todoer.MixProject do
       {:argon2_elixir, "~> 1.2"},
       {:guardian, "~> 1.0"},
       {:absinthe, "~> 1.6"},
-      {:dataloader, "~> 1.0.8"}
+      {:dataloader, "~> 1.0.8"},
+      {:corsica, "~> 1.0"}
     ]
   end
 
