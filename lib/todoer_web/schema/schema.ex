@@ -15,6 +15,12 @@ defmodule TodoerWeb.Schema do
       resolve(&Resolvers.User.list_users/3)
     end
 
+    @desc "Get current user"
+    field(:current_user, :user) do
+      middleware(Middleware.Authorize, :any)
+      resolve(&Resolvers.User.get_current_user/3)
+    end
+
     @desc "Get a list of all projects for a logged-in user"
     field :projects, list_of(:project) do
       middleware(Middleware.Authorize, :any)

@@ -39,4 +39,9 @@ defmodule TodoerWeb.Resolvers.User do
       _ -> {:ok, "user deleted"}
     end
   end
+
+  def get_current_user(_parent, _args, %{context: %{current_user: current_user}}) do
+    user = Todoer.Accounts.get_user!(current_user.id)
+    {:ok, user}
+  end
 end
