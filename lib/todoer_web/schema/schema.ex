@@ -26,6 +26,13 @@ defmodule TodoerWeb.Schema do
       middleware(Middleware.Authorize, :any)
       resolve(&Resolvers.Project.list_projects/3)
     end
+
+    @desc "Get project by id for current loggged in user"
+    field :project, :project do
+      arg(:project_id, non_null(:id))
+      middleware(Middleware.Authorize, :any)
+      resolve(&Resolvers.Project.get_project/3)
+    end
   end
 
   mutation do

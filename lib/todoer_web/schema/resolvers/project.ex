@@ -7,6 +7,8 @@ defmodule TodoerWeb.Resolvers.Project do
   #   {:ok, projects}
   # end
 
+  import Ecto.Query, warn: false
+
   def list_projects(_parent, _args, %{context: %{current_user: current_user}}) do
     projects = Todoer.Repo.all(Ecto.assoc(current_user, :projects))
     {:ok, projects}
@@ -35,6 +37,16 @@ defmodule TodoerWeb.Resolvers.Project do
   def update_project(_parent, %{input: input}, _info) do
     project = Todoer.Content.get_project!(input.id)
     Todoer.Content.update_project(project, input)
+  end
+
+  def get_project(_parent, %{project_id: project_id}, %{context: %{current_user: current_user}}) do
+    query =
+      from(p in Todoer.Content.Project,
+        where: p.id == ^project_id and p.user_id == ^current_user.id
+      )
+
+    project = Todoer.Repo.one(query)
+    {:ok, project}
   end
 
   def delete_project(_parent, %{id: id}, _info) do

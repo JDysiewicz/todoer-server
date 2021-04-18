@@ -11,6 +11,8 @@ defmodule TodoerWeb.Resolvers.Todo do
 
   def create_todo(_parent, %{input: input}, %{context: %{current_user: current_user}}) do
     todo_input = Map.merge(input, %{user_id: current_user.id})
+    IO.inspect("++++++++++")
+    IO.inspect(todo_input)
     Todoer.Content.create_todo(todo_input)
   end
 

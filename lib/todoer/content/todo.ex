@@ -3,11 +3,11 @@ defmodule Todoer.Content.Todo do
   import Ecto.Changeset
 
   schema "todos" do
-    field :due, :date, default: nil
-    field :title, :string
-    field :done, :boolean, default: false
-    belongs_to :user, Todoer.Accounts.User
-    belongs_to :project, Todoer.Content.Project
+    field(:due, :naive_datetime, default: nil)
+    field(:title, :string)
+    field(:done, :boolean, default: false)
+    belongs_to(:user, Todoer.Accounts.User)
+    belongs_to(:project, Todoer.Content.Project)
 
     timestamps()
   end
@@ -16,6 +16,7 @@ defmodule Todoer.Content.Todo do
   def changeset(todo, attrs) do
     todo
     |> cast(attrs, [:title, :due, :done, :user_id, :project_id])
+    |> IO.inspect()
     |> validate_required([:title, :done, :user_id, :project_id])
   end
 end

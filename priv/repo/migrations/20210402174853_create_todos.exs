@@ -3,12 +3,11 @@ defmodule Todoer.Repo.Migrations.CreateTodos do
 
   def change do
     create table(:todos) do
-      add :title, :string
-      add :due, :date
-      add :done, :boolean
+      add(:title, :string)
+      add(:due, :naive_datetime)
+      add(:done, :boolean)
 
       timestamps()
     end
-
   end
 end
