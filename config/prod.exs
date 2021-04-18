@@ -17,9 +17,9 @@ config :todoer, Todoer.Repo,
   adapter: Ecto.Adapters.Postgres,
   url: System.get_env("DATABASE_URL"),
   ssl: true,
-  username: "f7e41cb1-d2ea-47f8-b1f4-fcf7187bad6a-user",
-  password: "pw-d55b907a-9fe0-4afe-93e9-6e674f8a8996",
-  database: "f7e41cb1-d2ea-47f8-b1f4-fcf7187bad6a",
+  username: "0fec4a1b-8de9-4cef-878e-67a8974f7349-user",
+  password: "pw-69b63a62-2a04-401b-84e7-253ba627d8e5",
+  database: "0fec4a1b-8de9-4cef-878e-67a8974f7349",
   hostname: "postgres-free-tier-v2020.gigalixir.com",
   # Free tier db only allows 4 connections. Rolling deploys need pool_size*(n+1) connections.
   pool_size: 2
