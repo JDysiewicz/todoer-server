@@ -37,6 +37,13 @@ defmodule Todoer.Accounts do
   """
   def get_user!(id), do: Repo.get!(User, id)
 
+  def get_user_by_email(email) do
+    case Todoer.Repo.one(from u in "users", where: u.email == ^email, select: u.email) do
+      nil -> {:ok, nil}
+      _ -> {:error, "Email already exists"}
+    end
+  end
+
   def delete_user_by_id(id) do
     from(u in "users", where: u.id == ^id) |> Todoer.Repo.delete_all()
   end
@@ -53,7 +60,14 @@ defmodule Todoer.Accounts do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_user(attrs \\ %{}) do
+  def create_user(attrs) do
+    case get_user_by_email(attrs.email) do
+      {:ok, _} -> insert_user(attrs)
+      {:error, reason} -> {:error, reason}
+    end
+  end
+
+  defp insert_user(attrs) do
     %User{}
     |> User.changeset(attrs)
     |> Repo.insert()
