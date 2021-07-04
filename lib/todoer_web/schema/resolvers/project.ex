@@ -50,7 +50,8 @@ defmodule TodoerWeb.Resolvers.Project do
   end
 
   def delete_project(_parent, %{id: id}, _info) do
-    {num, _extra} = Todoer.Content.delete_project_by_id(id)
+    {id_int, _extra} = Integer.parse(id)
+    {num, _extra} = Todoer.Content.delete_project_by_id(id_int)
 
     case num do
       0 -> {:error, "no entry found with that ID"}
